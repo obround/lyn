@@ -1,0 +1,40 @@
+procedure %test_nested_control_flow() {
+.bb0:
+    %i.0: i32 = const 1
+    %j.0: i32 = const 1
+    %k.0: i32 = const 0
+    ubr .bb1
+
+.bb1:
+    %k.1: void = phi((.bb0, %k.0), (.bb6, %k.4))
+    %j.1: void = phi((.bb0, %j.0), (.bb6, %j.5))
+    %t0.0: i32 = const 100
+    %t1.0: i1 = lt %k.1 %t0.0
+    cbr %t1.0 .bb2 .bb3
+
+.bb2:
+    %t2.0: i32 = const 20
+    %t3.0: i1 = lt %j.1 %t2.0
+    cbr %t3.0 .bb4 .bb5
+
+.bb3:
+    return %j.1
+
+.bb4:
+    %t4.0: i32 = const 1
+    %j.3: i32 = id %i.0
+    %k.2: i32 = add %k.1 %t4.0
+    ubr .bb6
+
+.bb5:
+    %t5.0: i32 = const 2
+    %j.4: i32 = id %k.1
+    %k.3: i32 = add %k.1 %t5.0
+    ubr .bb6
+
+.bb6:
+    %k.4: void = phi((.bb4, %k.2), (.bb5, %k.3))
+    %j.5: void = phi((.bb4, %j.3), (.bb5, %j.4))
+    %l.0: i32 = add %i.0 %k.4
+    ubr .bb1
+}

@@ -1,0 +1,9 @@
+procedure %test_multiple_bbs() {
+.bb0:
+    %i.0: i32 = const 1
+    %j.0: i32 = const 0
+    ubr .bb1
+
+.bb1:
+    %k.0: i32 = add %i.0 %j.0
+}

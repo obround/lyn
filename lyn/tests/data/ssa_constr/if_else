@@ -1,0 +1,19 @@
+procedure %test_if_else() {
+.bb0:
+    %i.0: i32 = const 0
+    %j.0: i32 = const 1
+    %t0.0: i1 = lt %i.0 %j.0
+    cbr %t0.0 .bb1 .bb2
+
+.bb1:
+    %k.0: i32 = add %i.0 %j.0
+    ubr .bb3
+
+.bb2:
+    %k.1: i32 = sub %i.0 %j.0
+    ubr .bb3
+
+.bb3:
+    %k.2: void = phi((.bb1, %k.0), (.bb2, %k.1))
+    %l.0: i32 = id %k.2
+}

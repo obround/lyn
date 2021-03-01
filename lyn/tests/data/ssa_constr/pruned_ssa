@@ -1,0 +1,23 @@
+procedure %test_pruned_ssa() {
+.bb0:
+    %i.0: i32 = const 0
+    %j.0: i32 = const 1
+    %t0.0: i1 = lt %i.0 %j.0
+    cbr %t0.0 .bb1 .bb2
+
+.bb1:
+    %x.0: i32 = const 100
+    %y.0: i32 = id %x.0
+    %z.0: i32 = id %y.0
+    ubr .bb3
+
+.bb2:
+    %x.1: i32 = const 101
+    %y.1: i32 = id %x.1
+    %z.1: i32 = id %y.1
+    ubr .bb3
+
+.bb3:
+    %z.2: void = phi((.bb1, %z.0), (.bb2, %z.1))
+    %l.0: i32 = id %z.2
+}

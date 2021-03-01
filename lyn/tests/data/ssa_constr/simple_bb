@@ -1,0 +1,6 @@
+procedure %test_simple_bb() {
+.bb0:
+    %i.0: i32 = const 1
+    %j.0: i32 = const 1
+    %k.0: i32 = add %i.0 %j.0
+}
